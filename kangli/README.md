@@ -1,1 +1,1 @@
-2019 algorithmic tasks organized by problem technique type. 
+2019 algorithmic tasks organized by source and problem type.
