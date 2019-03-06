@@ -1,0 +1,42 @@
+class LoadBalancer:
+    def __init__(self):
+        # The point is: 1. insert/remove fast enough - hash ; 2. easy to use random select - list
+        # combine: use hash to record the index of the element 
+        # remove element from list: swap the element with the last one, then delete
+        self.hash_table = {}
+        self.array = []
+
+    """
+    @param: server_id: add a new server to the cluster
+    @return: nothing
+    """
+    def add(self, server_id):
+        # write your code here
+        self.array.append(server_id)
+        self.hash_table[server_id] = len(self.array) - 1 
+
+    """
+    @param: server_id: server_id remove a bad server from the cluster
+    @return: nothing
+    """
+    def remove(self, server_id):
+        # find the index of element in list, delete
+        # swap the element with the last one in list, then delete
+        # update the last element index in hash
+        if server_id in self.hash_table:
+            server_index = self.hash_table[server_id]
+            del self.hash_table[server_id]
+            self.array[server_index], self.array[-1] = self.array[-1], self.array[server_index]
+            self.hash_table[self.array[server_index]] = server_index
+            self.array.pop()
+            # if server_index < len(self.array):
+            #     self.hash_table[self.array[server_index]] = server_index
+            
+
+    """
+    @return: pick a server in the cluster randomly with equal probability
+    """
+    def pick(self):
+        # write your code here
+        import random
+        return random.choice(self.array)
