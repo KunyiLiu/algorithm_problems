@@ -12,8 +12,8 @@ class Solution:
     @return: A list of The first node of linked list which have twice size
     """
     def rehashing(self, hashTable):
-        # size/capacity > 0.1
-        # about single linked list 
+        # rehash when size/capacity > 0.1
+        # deal with single linked list 
         if len(hashTable) == 0 or hashTable is None:
             return hashTable
         
