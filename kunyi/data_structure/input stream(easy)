@@ -1,0 +1,21 @@
+class Solution:
+    """
+    @param inputA: Input stream A
+    @param inputB: Input stream B
+    @return: The answer
+    """
+    def inputStream(self, inputA, inputB):
+        # using stack 
+        stackA, stackB = [], []
+        self.final_result(stackA, inputA)
+        self.final_result(stackB, inputB)
+        return 'YES' if stackB == stackA else 'NO'
+        
+    def final_result(self, stack, _input):
+        for i in _input:
+            if i == '<':
+                if len(stack) > 0:
+                    stack.pop()
+                continue
+            
+            stack.append(i)
