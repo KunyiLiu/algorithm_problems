@@ -1,0 +1,58 @@
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self._next = None
+
+
+class Solution:
+    """
+    @param nums: a continuous stream of numbers
+    @param number: a number
+    @return: returns the first unique number
+    """
+    def remove(self, prev):
+        # prev -> node -> next - ... -> tail
+        # to prev -> next - ... -> tail 
+        prev._next = prev._next._next 
+        if prev._next:
+            self.keyToPrev[prev._next.key] = prev
+        else:
+            self.tail = prev
+            
+    def add(self, node):
+        # add to the end 
+        self.tail._next = node
+        self.keyToPrev[node.key] = self.tail
+        self.tail = node 
+        
+    def firstNumber(self):
+        if self.head._next is None:
+            return -1 
+        return self.head._next.key
+    
+    def firstUniqueNumber(self, nums, number):
+        # datestream -- O(n)
+        # imitate insert/delete/getRandom
+        # use a hashmap to record {unique_number: index]
+        # a list to make sure it's the first, when delete keys from hashmap, 
+        # we also need to swap the list[index] with list[-1], pop() and update the last element position in hashmap
+        
+        # a little bit different - first is important
+        # make remove in O(1), single linked list
+        self.head = Node(0)
+        self.tail = self.head
+        self.duplicates = {}
+        self.keyToPrev = {}
+        for num in nums:
+            if num not in self.duplicates:
+                if num in self.keyToPrev:
+                    prev = self.keyToPrev[num]
+                    self.remove(prev)
+                    self.duplicates[num] = None
+                else:
+                    node = Node(num)
+                    self.add(node)
+            if num == number:
+                return self.firstNumber()
+        
+        return -1
