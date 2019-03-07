@@ -1,0 +1,49 @@
+class Node:
+    def __init__(self, key):
+        self.key = key 
+        self._next = None
+        
+class DataStream:
+    
+    def __init__(self):
+        # do intialization if necessary
+        self.head = Node(0)
+        self.tail = self.head
+        self.keyToPrev = {}
+        self.duplicates = set()
+        
+    def moveToTail(self, prev):
+        # from: prev -> node -> next -> ... -> tail
+        # to: prev -> next -> .. -> tail 
+        prev._next = prev._next._next 
+        if prev._next:
+            self.keyToPrev[prev._next.key] = prev 
+        else:
+            # special case node is tail 
+            self.tail = prev 
+
+    """
+    @param num: next number in stream
+    @return: nothing
+    """
+    def add(self, num):
+        # write your code here
+        if num not in self.duplicates:
+            if num in self.keyToPrev:
+                prev = self.keyToPrev[num]
+                self.moveToTail(prev)
+                self.duplicates.add(num)
+            else:
+                node = Node(num)
+                self.tail._next = node
+                self.keyToPrev[node.key] = self.tail 
+                self.tail = node
+
+    """
+    @return: the first unique number in stream
+    """
+    def firstUnique(self):
+        # write your code here
+        if self.head._next is None:
+            return -1 
+        return self.head._next.key
