@@ -32,12 +32,3 @@ class Solution(object):
 s = Solution()
 s.countComponents(5, [[0,1],[1,2],[3,4]])
 
-# visit = {}
-# for i in range(5):
-#     visit[i] = []
-#     visit[i].append(2*i)
-# print visit
-#
-# for i in range(5):
-#     visit[i].append("bl")
-# print visit
