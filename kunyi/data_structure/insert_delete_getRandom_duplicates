@@ -34,6 +34,10 @@ class RandomizedCollection(object):
         if val not in self.hash_table or len(self.hash_table[val]) == 0:
             return False
         
+        # get(pop) the replaced index
+        # if pop we need to judge to see if it's last element, then swap element
+        # modify the hash_table key: value 
+        # pop the last element 
         replaced_ind = self.hash_table[val].pop()
         last_ind = len(self.data_list) - 1 
         if replaced_ind != last_ind:
