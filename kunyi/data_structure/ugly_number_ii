@@ -1,0 +1,29 @@
+class Solution:
+    """
+    @param n: An integer
+    @return: return a  integer as description.
+    """
+    def nthUglyNumber(self, n):
+        import heapq
+        # write your code here
+        heap_elem = [2, 3, 5]
+        heap = [1]
+        visited = set([1])
+        
+        val = None
+        for i in range(n):
+            # get the smallest element
+            # log(n) for heappop
+            val = heapq.heappop(heap)
+            for elem in heap_elem:
+                if val * elem not in visited:
+                    visited.add(val*elem)
+                    heapq.heappush(heap, val*elem)
+        
+        # add it turn by turn
+        # every turn get the smallest element
+        # [1] get 1 
+        # [2, 3, 5] get 2 
+        # [3, 5, 4, 6, 10] get 3 
+        
+        return val 
