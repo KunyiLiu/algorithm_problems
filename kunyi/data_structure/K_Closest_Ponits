@@ -1,0 +1,87 @@
+"""
+Definition for a point.
+class Point:
+    def __init__(self, a=0, b=0):
+        self.x = a
+        self.y = b
+"""
+
+# Using Priorityqueue,
+# if size of heap > k, pop
+
+class Solution:
+    """
+    @param points: a list of points
+    @param origin: a point
+    @param k: An integer
+    @return: the k closest points
+    """
+    def distance(self, p1, p2):
+        return (p1.x - p2.x)**2 +  (p1.y - p2.y)**2
+
+    def kClosest(self, points, origin, k):
+        # write your code here
+        import heapq
+        result = []
+        priorityq = []
+        for point in points:
+            dist = self.distance(origin, point)
+            # sorting order: dist -> x -> y
+            heapq.heappush(priorityq, (-dist, -point.x, -point.y))
+            
+            if len(priorityq) > k:
+                heapq.heappop(priorityq)
+                
+        while len(priorityq) > 0:
+            _, x, y = heapq.heappop(priorityq)
+            result.append(Point(-x, -y))
+            
+        return result[::-1]
+        
+# Using customized cmp function in sorted
+"""
+Definition for a point.
+class Point:
+    def __init__(self, a=0, b=0):
+        self.x = a
+        self.y = b
+"""
+
+class Point_distance(Point):
+    def __init__(self, a, b, distance=0):
+        super(Point_distance, self).__init__(a, b)
+        self.distance = distance
+        
+class Solution:
+    """
+    @param points: a list of points
+    @param origin: a point
+    @param k: An integer
+    @return: the k closest points
+    """
+    def _cmp(self, x, y):
+        if x.distance != y.distance:
+            # negative not move 
+            return x.distance - y.distance
+        else:
+            if x.x != y.x:
+                return x.x - y.x 
+            else:
+                return x.y - y.y  
+            
+    def kClosest(self, points, origin, k):
+        # write your code here
+        result = []
+        if len(points) == 0:
+            return result 
+          
+        tmp = []  
+        for point in points:
+            distance = self.distance(origin, point)
+            tmp.append(Point_distance(point.x, point.y, distance))
+            
+        sorted_tmp = sorted(tmp, cmp=self._cmp)
+        return [[p.x, p.y] for p in sorted_tmp[:k]]
+        
+    def distance(self, p1, p2):
+        return (p1.x - p2.x)**2 +  (p1.y - p2.y)**2
