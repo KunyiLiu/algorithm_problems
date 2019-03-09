@@ -1,0 +1,32 @@
+import heapq
+
+class Solution:
+    """
+    @param: k: An integer
+    """
+    def __init__(self, k):
+        # method 1: add to list, O(1)  
+        # when topK, heappop(), need heapify O(n)
+        # method 2: add to list and heappush O(logk) when 
+        # return size k of heap 
+        self.heap = []
+        self.k = k
+        
+
+    """
+    @param: num: Number to be added
+    @return: nothing
+    """
+    def add(self, num):
+        # write your code here
+        heapq.heappush(self.heap, num)
+        if len(self.heap) > self.k:
+            # remove the smallest
+            heapq.heappop(self.heap)
+
+    """
+    @return: Top k element
+    """
+    def topk(self):
+        # write your code here
+        return sorted(self.heap)[::-1]
