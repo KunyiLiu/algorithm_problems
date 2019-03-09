@@ -1,0 +1,65 @@
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.word_list = []
+        self.is_word = False
+        
+class Trie:
+    root = TrieNode()
+    
+    def add(self, word):
+        node = self.root 
+        for s in word:
+            if s not in node.children:
+                node.children[s] = TrieNode()
+            node = node.children[s]
+            node.word_list.append(word)
+        node.is_word = True
+        
+    def find(self, word):
+        node = self.root
+        for s in word:
+            if s not in node.children:
+                return 
+            node = node.children[s]
+        return node  # final node
+        
+    def get_word_with_prefix(self, prefix):
+        node = self.find(prefix)
+        return node.word_list if node is not None else []
+        
+
+class Solution:
+    """
+    @param: words: a set of words without duplicates
+    @return: all word squares
+    """
+    words = []
+    def wordSquares(self, words):
+        # write your code here
+        if len(words) == 0 or len(words[0]) == 0:
+            return []
+
+        self.words = words
+        trie_tree = Trie()
+        for word in words:
+            trie_tree.add(word)
+          
+        result = []   
+        for word in words:
+            self.dfs(trie_tree, [word], result)
+        return result 
+        
+        
+    def dfs(self, trie, tmp, result):
+        n = len(self.words[0])
+        curt_index = len(tmp)
+        if curt_index == n:
+            result.append(tmp[:])
+            return 
+         
+        prefix = ''.join([j[curt_index] for j in tmp])
+        for word in trie.get_word_with_prefix(prefix):
+            tmp.append(word)
+            self.dfs(trie, tmp, result)
+            tmp.pop()
