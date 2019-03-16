@@ -72,6 +72,7 @@ class Solution:
             return 
         
         # subset.append(self.s[ind])
+        # which actually create a new list for subset
         self.dfs(subset + [self.s[ind]], ind + 1)
         # subset.pop()
 
