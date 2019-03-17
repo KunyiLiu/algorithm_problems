@@ -34,3 +34,28 @@ class Solution:
         memo[(s_index, p_index)] = matched
             
         return matched
+    
+# method 2 DP bottom up
+class Solution:
+    """
+    @param s: A string 
+    @param p: A string includes "?" and "*"
+    @return: is Match?
+    """
+    def isMatch(self, s, p):
+        # write your code here
+        m, n = len(s), len(p)
+        # [[False] * (n+1) for j in range(m+1)]
+        dp = [[False for i in range(n+1)] for j in range(m+1)]
+        dp[0][0] = True
+        
+        for i in range(m+1):
+            for j in range(n+1):
+                if i> 0 and j>0:
+                    dp[i][j] |= dp[i-1][j-1] and (s[i-1] == p[j-1] or p[j-1] in ['*', '?'])
+                if j>0:
+                    dp[i][j] |= dp[i][j-1] and p[j-1] == '*'
+                if i>0 and j>0:
+                    dp[i][j] |= dp[i-1][j] and p[j-1] == '*'
+                    
+        return dp[m][n]
