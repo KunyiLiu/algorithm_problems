@@ -20,6 +20,7 @@ class Solution:
                     dp[i+1][j+1] = dp[i][j]
                 if p[j] == '*':
                     dp[i+1][j+1] = dp[i+1][j-1]
+                    # a char precede to * = s[i], see the last step of string s
                     if self.is_char_match(s[i], p[j-1]):
                         dp[i+1][j+1] |= dp[i][j+1]
                     
