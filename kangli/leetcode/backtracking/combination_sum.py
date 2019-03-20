@@ -16,6 +16,8 @@ class Solution(object):
 
 
 '''
+39. Combination Sum
+
 Success
 Runtime: 92 ms, faster than 46.98% of Python online submissions for Combination Sum.
 Memory Usage: 10.7 MB, less than 68.25% of Python online submissions for Combination Sum.
@@ -30,15 +32,9 @@ Related Topics: Array, Backtracking
 
 Similar Questions:
 Letter Combinations of a Phone Number
-Medium
 Combination Sum II
-Medium
 Combinations
-Medium
 Combination Sum III
-Medium
 Factor Combinations
-Medium
 Combination Sum IV
-Medium
 '''
