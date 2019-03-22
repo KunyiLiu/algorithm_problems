@@ -4,7 +4,7 @@ class Solution:
     @return: nothing
     """
     def nextPermutation(self, nums):
-        # write your code here
+        # 例如[1,1,1,2,2,3]，排列数为6!÷(3!×2!×1!)。
         n = len(nums)
         # corner case  
         if n < 2:
