@@ -13,6 +13,9 @@ class Solution:
             if num[j] > num[i]:
                 num[i], num[j] = num[j], num[i]
                 break
-        for j in range(0, (len(num) - i)//2):
-            num[i+j+1], num[len(num)-j-1] = num[len(num)-j-1], num[i+j+1]
-        return num
+        # nums i+1 ... nums[n-1] descending 
+        # reverse 
+        return num[:(i+1)] + sorted(num[i+1: len(num)])
+        # for j in range(0, (len(num) - i)//2):
+        #     num[i+j+1], num[len(num)-j-1] = num[len(num)-j-1], num[i+j+1]
+        # return num
