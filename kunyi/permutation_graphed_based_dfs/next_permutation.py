@@ -2,7 +2,9 @@ class Solution:
     # @param num :  a list of integer
     # @return : a list of integer
     def nextPermutation(self, num):
-        # write your code here
+        # 1.scan from right to left to find the ind that break the descending list
+        # 2. find the j that just larget than num[i], swap num[i] and num[j]
+        # 3. At this time, the num[i+1] - num[n-1] still descending/non-ascending, reverse the sublist
         for i in range(len(num)-2, -1, -1):
             if num[i] < num[i+1]:
                 break
