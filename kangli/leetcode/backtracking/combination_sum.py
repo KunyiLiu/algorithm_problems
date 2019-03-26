@@ -28,6 +28,7 @@ Status: Accepted
 Runtime: 92 ms
 Memory Usage: 10.7 MB
 
+Next challenges: Letter Combinations of a Phone Number
 Related Topics: Array, Backtracking
 
 Similar Questions:
