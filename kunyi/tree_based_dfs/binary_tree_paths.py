@@ -21,11 +21,12 @@ class Solution:
         return self.result 
         
     def helper(self, root, subtree):
-        if root is not None:
-            subtree.append(str(root.val))
+        if root is None:
+            return 
+        subtree.append(str(root.val))
         if root.left is None and root.right is None:
             self.result.append('->'.join(subtree))
-            return 
+            # return
 
         if root.left:
             self.helper(root.left, subtree)
