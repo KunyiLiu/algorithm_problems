@@ -59,9 +59,11 @@ class Solution:
         stack = [dummy]
         
         for i in range(k):
+            # remove the smallest one
             node = stack.pop()
             if node.right:
                 node = node.right 
+                # inorder successor added to the very last 
                 while node:
                     stack.append(node)
                     node = node.left 
