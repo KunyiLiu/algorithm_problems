@@ -5,7 +5,7 @@ class TreeNode:
         self.val = val
         self.left, self.right = None, None
 """
-
+# recursion + min/max of subtree
 class Solution:
     """
     @param root: The root of binary tree.
@@ -40,3 +40,68 @@ class Solution:
         
             return is_valid, rootmin, rootmax
         return False, None, None
+    
+# method 2 recursion + last_val
+    def isValidBST(self, root):
+        self.is_bst = True
+        self.lastval = None
+        self.helper(root)
+        return self.is_bst
+        
+    def helper(self, root):
+        if root is None:
+            return 
+        self.helper(root.left)
+        if self.lastval and self.lastval >= root.val:
+            self.is_bst = False
+            return
+        self.lastval = root.val
+        self.helper(root.right)
+
+# method 3: iterator
+     """
+Definition of TreeNode:
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+"""
+
+class Solution:
+    """
+    @param root: The root of binary tree.
+    @return: True if the binary tree is BST, or false
+    """
+    def isValidBST(self, root):
+        # write your code here
+        if root is None:
+            return True 
+            
+        last_node, node = None, root 
+        stack = []
+        
+        while node is not None:
+            stack.append(node)
+            node = node.left 
+            
+        last_node = stack[-1]
+        # stack - record the path to node (not includes node)
+        while stack:
+            node = stack[-1]
+            if node.right:
+                node = node.right 
+                while node:
+                    stack.append(node)
+                    node = node.left
+            else:
+                node = stack.pop()
+                while stack and stack[-1].right == node:
+                    node = stack.pop()
+                    
+            if stack:
+                # compare the previous and current last_node
+                if stack[-1].val <= last_node.val:
+                    return False
+                last_node = stack[-1]
+                
+        return True 
