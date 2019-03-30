@@ -34,7 +34,8 @@ class BSTIterator:
     @return: return next node
     """
     def next(self, ):
-        # from the beginneing
+        # from the beginneing, O(h) 
+        # but on avg, the time is O(1)
         while self.cur is not None:
             self.stack.append(self.cur)
             self.cur = self.cur.left 
