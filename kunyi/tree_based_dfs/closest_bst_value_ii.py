@@ -101,6 +101,7 @@ class Solution:
                 node = node.right
 
 # method 3 find the largest node closest to target, and then two pointers
+# O(n)
     def closestKValues(self, root, target, k):
         if root is None or k == 0:
             return []
