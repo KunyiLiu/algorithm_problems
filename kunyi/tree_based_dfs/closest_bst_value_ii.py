@@ -41,3 +41,61 @@ class Solution:
                 
         result = [node.val for _, node in heap]
         return result[::-1]
+    
+# Method 2
+"""
+Definition of TreeNode:
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+"""
+
+class Solution:
+    """
+    @param root: the given BST
+    @param target: the given target
+    @param k: the given k
+    @return: k values in the BST that are closest to the target
+    """
+    def closestKValues(self, root, target, k):
+        # use to stack pre and suc to record the nodes 
+        # in the path to target 
+        # pre records the smaller nodes, while suc records the larger nodes 
+        # two functions get_predecessor, get_successor 
+        # time complexity O(h + k), space O(h)
+        suc, pre, res = [], [], []
+        while root:
+            if root.val > target:
+                suc.append(root)
+                root = root.left 
+            else:
+                pre.append(root)
+                root = root.right 
+
+        for i in range(k):
+            if len(pre) == 0 or (len(suc) != 0 and target - pre[-1].val > suc[-1].val - target):
+                res.append(suc[-1].val)
+                self.get_successor(suc)
+            else:
+                res.append(pre[-1].val)
+                self.get_predecessor(pre)
+
+                
+        return res 
+        
+    def get_successor(self, stack):
+        node = stack.pop()
+        if node.right:
+            node = node.right
+            while node:
+                stack.append(node)
+                node = node.left
+            
+    def get_predecessor(self, stack):
+        node = stack.pop()
+        if node.left:
+            node = node.left
+            while node:
+                stack.append(node)
+                node = node.right
