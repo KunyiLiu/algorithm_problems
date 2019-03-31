@@ -99,3 +99,21 @@ class Solution:
             while node:
                 stack.append(node)
                 node = node.right
+
+# method 3 find the largest node closest to target, and then two pointers
+    def closestKValues(self, root, target, k):
+        if root is None or k == 0:
+            return []
+            
+        nums = self.get_inorder(root)
+        left = self.find_lower_index(nums, target)
+        right = left + 1
+        results = []
+        for _ in range(k):
+            if self.is_left_closer(nums, left, right, target):
+                results.append(nums[left])
+                left -= 1
+            else:
+                results.append(nums[right])
+                right += 1
+        return results
