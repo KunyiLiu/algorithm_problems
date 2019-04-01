@@ -67,3 +67,25 @@ class Solution:
                     node = stack.pop()
                 
         return result 
+
+# method 3 use current pointer 
+class Solution:
+    """
+    @param root: A Tree
+    @return: Preorder in ArrayList which contains node values.
+    """
+    def preorderTraversal(self, root):
+        # using current pointer 
+        current = root 
+        result, stack = [], []
+        while len(stack) > 0 or current is not None:
+            if current is not None:
+                stack.append(current)
+                current = current.left 
+                
+            else:
+                current = stack.pop()
+                result.append(current.val)
+                current = current.right 
+                
+        return resul
