@@ -13,3 +13,5 @@ for i in xrange(1, t + 1):
     path = raw_input()
     my_path = make_path(path)
     print("Case #{}: {}".format(i, my_path))
+
+#works passed all 3 test sets
