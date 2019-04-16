@@ -30,3 +30,35 @@ class Solution:
         
             
         return sum(dp[(m-1, n-1)])
+    
+    
+# method 2
+class Solution:
+    """
+    @param: : an array of arrays
+    @return: the sum of all unique weighted paths
+    """
+
+    def uniqueWeightedPaths(self, grid):
+        # write your codes here
+        if grid is None:
+            return 0 
+            
+        return sum(self.helper(0, 0, grid, {}))
+    
+    # the current sum set to the end from (start, end) 
+    def helper(self, row, col, grid, memo):
+        m, n = len(grid), len(grid[0])
+        if row >= m or col >= n:
+            return set()
+        
+        if row == m -1 and col == n - 1:
+            return set([grid[m-1][n-1]])
+            
+        if (row, col) in memo:
+            return memo[(row, col)]
+            
+        right = self.helper(row + 1, col, grid, memo)
+        down = self.helper(row, col + 1, grid, memo)
+        memo[(row, col)] =set([(i + grid[row][col]) for i in right.union(down)])
+        return  memo[(row, col)]
