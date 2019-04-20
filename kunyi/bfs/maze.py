@@ -16,16 +16,15 @@ class Solution:
         queue.put(start)
         while not queue.empty():
             point = queue.get()
-            # update visited, add tmp destination to queue 
-            tmp = self.bfs(point, visited, maze, queue)
-            if destination in tmp:
+            if point == destination:
                 return True 
+            # update visited, add tmp destination to queue 
+            self.bfs(point, visited, maze, queue)
                 
         return False 
         
     def bfs(self, point, visited, maze, queue):
         m, n = len(maze), len(maze[0])
-        tmp = []
         deltaX = [1, -1, 0, 0]
         deltaY = [0, 0, 1, -1]
         x, y = point[0], point[1]
@@ -38,6 +37,3 @@ class Solution:
             if (final_x != x or final_y != y) and (final_x, final_y) not in visited:
                 queue.put([final_x, final_y])
                 visited.add((final_x, final_y))
-                tmp.append([final_x, final_y])
-                
-        return tmp
