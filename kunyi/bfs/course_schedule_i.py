@@ -25,7 +25,6 @@ class Solution:
             for neighbor in adjancy_list[node]:
                 ind_list[neighbor] -= 1 
                 if ind_list[neighbor] == 0:
-                    queue.put(neighbor)
-                    
+                    queue.put(neighbor)                 
                     
         return len(result) == numCourses
