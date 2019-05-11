@@ -88,5 +88,6 @@ class Solution:
         result.append(node)
         for i in node.neighbors:
             ind[i] -= 1
+            # start from the neighbours (which just ind - 1)
             if ind[i] == 0:
                 self.dfs(i, ind, result)
