@@ -4,7 +4,7 @@ class Solution:
     @return: a string which is correct order
     """
     def alienOrder(self, words):
-        # Write your code her
+        # Write your code here
         import heapq
         heap = []
         preps, graph, inds = [], {}, {}
