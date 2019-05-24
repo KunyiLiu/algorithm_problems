@@ -6,9 +6,6 @@ class Solution:
     """
     def validPalindrome(self, s):
         #  lowercase characters
-        if s == '':
-            return True 
-            
         start, end = 0, len(s) - 1 
         count = 0
         while start < end:
