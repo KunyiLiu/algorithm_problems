@@ -1,4 +1,4 @@
-########## Method 1  self.abs_diff = sys.maxsize . ##########
+########## Method 1  self.diff = sys.maxsize  ##########
 class Solution:
     """
     @param numbers: Give an array numbers of n integer
