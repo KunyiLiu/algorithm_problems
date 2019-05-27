@@ -62,3 +62,7 @@ class Solution:
         
         self.sort(colors, color_from, color, index_from, right)
         self.sort(colors, color + 1, color_to, left, index_to)
+
+        
+ ##### rainbow sort - counting sort ######
+## 在数字范围较小的时候效率高，空间复杂度是数字的范围。是说统计每个数字出现的次数，然后从小到大排序
