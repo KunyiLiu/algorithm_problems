@@ -61,5 +61,43 @@ class Solution:
             return self.partition(nums, left, end, k)
         
         return nums[k]
+ 
+########### partition #############
+class Solution:
+    """
+    @param n: An integer
+    @param nums: An array
+    @return: the Kth largest element
+    """
+    def kthLargestElement(self, n, nums):
+        # write your code here
+        # heap - O(nlogk)
+        # partition O(n)
+        k = len(nums) - n 
+        result = self.mergesort(nums, 0, len(nums) - 1, k)
+        return result 
+        
+    def mergesort(self, nums, left, right, k):
+        pivot_index = self.partition_array(nums, left, right)
+        if pivot_index == k:
+            return nums[k]
+        elif pivot_index < k:
+            return self.mergesort(nums, pivot_index + 1, right, k)
+        elif pivot_index > k:
+            return self.mergesort(nums, left, pivot_index - 1, k)
+            
+    
+    def partition_array(self, nums, start, end):
+        pivot_ind, pivot = end, nums[end]
+        stored_ind = start
+        for i in range(start, end):
+            if nums[i] < pivot:
+                nums[i], nums[stored_ind] = nums[stored_ind], nums[i]
+                stored_ind += 1 
+        
+        # exchange with the right ind         
+        nums[stored_ind], nums[pivot_ind] = nums[pivot_ind], nums[stored_ind]
+        
+        return stored_ind
         
     
