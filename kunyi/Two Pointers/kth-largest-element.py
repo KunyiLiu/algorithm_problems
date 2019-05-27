@@ -35,15 +35,17 @@ class Solution:
     def partition(self, nums, start, end, k):
         """
         During the process, it's guaranteed start <= k <= end
+        kth smallest (0 based) element
         """
         if start == end:
-            return nums[k]
+            return nums[start]
             
         left, right = start, end
         pivot = nums[(start + end) // 2]
         while left <= right:
             while left <= right and nums[left] < pivot:
                 left += 1
+            # partition array's not move itself pivot
             while left <= right and nums[right] > pivot:
                 right -= 1
             if left <= right:
@@ -51,6 +53,8 @@ class Solution:
                 left, right = left + 1, right - 1
                 
         # left is not bigger than right
+        # print(left, right, k, nums, nums[left], pivot, start, end)
+
         if k <= right:
             return self.partition(nums, start, right, k)
         if k >= left:
