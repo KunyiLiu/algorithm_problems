@@ -1,3 +1,4 @@
+############## elems before stored_index/start < pivot, elems after that not sure ######
 ############# method 1. move all the elements < pivot to the left using stored index ###########
 class Solution:
     """
