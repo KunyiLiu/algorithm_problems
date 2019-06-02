@@ -70,6 +70,7 @@ class Solution:
         # 中间计算的时候，随时可以 % b 避免 overflow 其不影响结果，这是 % 运算的特性。
         ans = 1
         while n > 0:
+            # n == 1 final step
             if n % 2 == 1:
                 ans = (ans * a) % b
             a = a * a % b
