@@ -62,3 +62,39 @@ class Solution:
                 j = next
                 
         return False
+    
+########## Method #######
+class Solution:
+    """
+    @param nums: an array of positive and negative integers
+    @return: if there is a loop in this array
+    """
+    def circularArrayLoop(self, nums):
+        # Write your code here
+        for head in range(len(nums)):
+            slow, fast = head, head 
+            while True:
+                slow = self.get_index(nums, slow)
+                fast = self.get_index(nums, fast)
+                next_fast = self.get_index(nums, fast)
+                # If we meet element with different directions -> fail
+                if nums[head] * nums[fast] < 0 or nums[head] * nums[next_fast] < 0:
+                    break 
+                fast = next_fast
+                if fast == slow:
+                    # if loops with only 1 element -> fail
+                    if self.get_index(nums, slow) == slow:
+                        break 
+                    return True 
+            
+            while nums[head] * nums[slow] > 0:
+                next_head = self.get_index(nums, head)
+                nums[head] = 0
+                head = next_head
+                
+        return False
+    
+    
+    def get_index(self, nums, ind):
+        return (ind + nums[ind]) % len(nums)
+
