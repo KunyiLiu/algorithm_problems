@@ -63,7 +63,7 @@ class Solution:
         # dp[i][j] - is_pal substring between i to j  
         # dp[i][i] means the single char from string, True
         # dp[i][j] = (dp[i + 1][j-1] and s[i] == s[j]
-        
+        # result= s[start: start + longest]
         if not s:
             return ''
         
