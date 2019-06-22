@@ -27,3 +27,15 @@ class Solution:
         result.append(flight)
             
         return 
+
+### stack iteration ####
+    def helper(self, hash_table, result, flight):
+        stack = [flight]  # use stack with iteration to replace the recursion stack 
+        while len(stack) > 0:
+            latest_flight = stack[-1]
+            if latest_flight in hash_table and hash_table[latest_flight]:
+                to_flight = hash_table[latest_flight].pop(0)
+                stack.append(to_flight)
+            else:
+                result.append(latest_flight)
+                stack.pop()
