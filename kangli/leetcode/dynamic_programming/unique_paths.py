@@ -15,4 +15,7 @@ Next challenges:
 Unique Paths II
 Minimum Path Sum
 Dungeon Game
+
+Related Topics: Array, Dynamic Programming
+Similar Questions: Unique Paths II, Minimum Path Sum, Dungeon Game
 '''
