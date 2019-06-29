@@ -4,6 +4,7 @@ class Solution:
     @return: true if the frog is able to cross the river or false
     """
     def canCross(self, stones):
+        # compare with LIS, dp not record the direct result
         # dp {}
         # dp[stone] set, record steps to stone.
         # inference
