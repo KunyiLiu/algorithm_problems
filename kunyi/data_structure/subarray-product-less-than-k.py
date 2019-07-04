@@ -45,7 +45,7 @@ class Solution:
             while cur_product >= k and start <= i:
                 cur_product //= nums[start]
                 start += 1 
-
+            # subarrays ended with i
             ans += (i - start + 1)
                 
         return ans 
