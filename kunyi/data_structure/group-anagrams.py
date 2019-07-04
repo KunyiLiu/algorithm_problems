@@ -14,24 +14,24 @@ class Solution:
         ## character_counts  [{'a':1, 'e': 1, 't': 1}, {...], ...]
         # TIme complexisity: 
         # traverse through the whole list - 0{nm}, each word has maximum M characters
-        # result = []
-        # if len(strs) == 0:
-        #     return result
-        # character_counts = []
-        # for substr in strs:
-        #     tmp = {}
-        #     for i in substr:
-        #         if i not in tmp:
-        #             tmp[i] = 1 
-        #         else:
-        #             tmp[i] += 1 
-        #     if tmp in character_counts:
-        #         ind = character_counts.index(tmp)
-        #         result[ind].append(substr)
-        #     else:
-        #         character_counts.append(tmp)
-        #         result.append([substr])
-        # return result
+        result = []
+        if len(strs) == 0:
+            return result
+        character_counts = []
+        for substr in strs:
+            tmp = {}
+            for i in substr:
+                if i not in tmp:
+                    tmp[i] = 1 
+                else:
+                    tmp[i] += 1 
+            if tmp in character_counts:
+                ind = character_counts.index(tmp)
+                result[ind].append(substr)
+            else:
+                character_counts.append(tmp)
+                result.append([substr])
+        return result
         
         # set 2
         # get sorted version of each words in strs list, like ['aet', 'aet', ...]
