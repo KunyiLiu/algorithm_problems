@@ -19,13 +19,13 @@
          return select(list, pivotIndex + 1, right, k)
          
          
- class Solution:
+class Solution:
     # @param k & A a integer and an array
     # @return ans a integer
-    def kthLargestElement(self, k, A):
+    def kthSmallestElement(self, k, A):
         if not A or k < 1 or k > len(A):
             return None
-        return self.partition(A, 0, len(A) - 1, len(A) - k)
+        return self.partition(A, 0, len(A) - 1, k-1)
         
     def partition(self, nums, start, end, k):
         """
@@ -48,10 +48,10 @@
                 l += 1 
                 r -= 1 
                 
-        # l is the index that pivot can insert
-        if l == k:
-            return nums[l]
-        if l < k:
+        # nums[i] < pivot, i < l
+        if l <= k:
             return self.partition(nums, l, end, k)
         else:
             return self.partition(nums, start, l-1, k)
+            
+        return nums[k]
