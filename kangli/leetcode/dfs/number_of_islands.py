@@ -23,6 +23,18 @@ class Solution(object):
         else:
             return
 
-
 s = Solution()
 print s.numIslands([['1', '1', 0], [0, 0, 0], [0, 0, 0]])
+'''
+Success
+Details 
+Runtime: 80 ms, faster than 70.04% of Python3 online submissions for Number of Islands.
+Memory Usage: 17.7 MB, less than 9.53% of Python3 online submissions for Number of Islands.
+Next challenges: Surrounded Regions, Walls and Gates, Number of Islands II, 
+Number of Connected Components in an Undirected Graph, Number of Distinct Islands
+
+Related Topics: Depth-first Search, Breadth-first Search, Union Find
+Similar Questions: Surrounded Regions, Walls and Gates, Number of Islands II, 
+Number of Connected Components in an Undirected Graph, Number of Distinct Islands, 
+Max Area of Island
+'''
