@@ -1,3 +1,45 @@
+# 7/6/19 redo
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board:
+            return
+        m, n = len(board), len(board[0])
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if (i == 0 or i == m - 1 or j == 0 or j == n - 1) and board[i][j] == 'O':
+                    self.bfs(board, i, j)
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+                if board[i][j] == 'W':
+                    board[i][j] = 'O'
+
+    def bfs(self, board, sr, sc):
+        from collections import deque
+        queue = deque([(sr, sc)])
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        m, n = len(board), len(board[0])
+        board[sr][sc] = 'W'
+        while queue:
+            r, c = queue.popleft()
+            for d in directions:
+                nr, nc = d[0] + r, d[1] + c
+                if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                    board[nr][nc] = 'W'
+                    queue.append((nr, nc))
+'''
+
+59 / 59 test cases passed.
+Status: Accepted
+Runtime: 124 ms
+Memory Usage: 14.2 MB
+64.85% runtime and 79.62% memory
+'''
+
 class Solution(object):
     def solve(self, board):
         q = collections.deque([])
