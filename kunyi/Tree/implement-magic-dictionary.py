@@ -54,3 +54,59 @@ class MagicDictionary:
 # obj = MagicDictionary()
 # obj.buildDict(dict)
 # param_2 = obj.search(word)
+
+#########  children is array ##########
+class TrieNode:
+    def __init__(self):
+        self.children = [None] * 26
+        self.is_final = False
+
+class MagicDictionary:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TrieNode()
+        
+
+    def buildDict(self, dict: List[str]) -> None:
+        """
+        Build a dictionary through a list of words
+        """
+        for word in dict:
+            head = self.root
+            for s in word:
+                ind = ord(s) - ord('a')
+                if head.children[ind] is None:
+                    head.children[ind] = TrieNode()
+                head = head.children[ind]
+            head.is_final = True
+            
+    def contains(self, word: str) -> bool:
+        head = self.root
+        for s in word:
+            ind = ord(s) - ord('a')
+            if head.children[ind] is None:
+                return False
+            head = head.children[ind]
+        return head.is_final      
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if there is any word in the trie that equals to the given word after modifying exactly one character
+        """
+        for i, s in enumerate(word):
+            for char in range(ord('a'), ord('z') + 1):
+                char = chr(char)
+                if char == s:
+                    continue
+                # only modify one char
+                if self.contains(word[:i] + char + word[(i+1):]):
+                    return True
+        return False     
+
+# Your MagicDictionary object will be instantiated and called as such:
+# obj = MagicDictionary()
+# obj.buildDict(dict)
+# param_2 = obj.search(word)
