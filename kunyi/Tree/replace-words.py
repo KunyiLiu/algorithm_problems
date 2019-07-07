@@ -22,8 +22,10 @@ class Solution:
         head.index = ind
         
     def buildTrie(self, dict):
+        #   {   {   {   {
         # - c - a - t - #, ind
         # - b - a - t - #, ind
+        #   }   }   }   }
         for ind, word in enumerate(dict):
             self.insert(word, ind)
         
