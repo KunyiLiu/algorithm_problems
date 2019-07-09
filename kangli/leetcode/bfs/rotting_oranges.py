@@ -43,6 +43,8 @@ Next challenges: Walls and Gates
 Status: Accepted
 Runtime: 56 ms
 Memory Usage: 13.2 MB
+Your runtime beats 30.32 % of python3 submission
+Your memory usage beats 45.45 % of python3 submissions. 
 
 Related Topics: Breadth-first Search
 Similar Questions: Walls and Gates
