@@ -30,3 +30,45 @@ class Solution:
             result.append(node.val)
             
         return result
+    
+######### reverse of root right left, similar to preorder###############
+class Solution:
+    """
+    @param root: A Tree
+    @return: Postorder in ArrayList which contains node values.
+    """
+    def postorderTraversal(self, root):
+        # reserve - root right left
+        current = root
+        result, stack, reverse_result = [], [], []
+        while len(stack) > 0 or current is not None:
+            if current:
+                reverse_result.append(current.val)
+                stack.append(current)
+                current = current.right
+            else:
+                current = stack.pop()
+                current = current.left 
+                
+        return reverse_result[::-1]
+    
+    #############3 recursion ###################
+    class Solution:
+    """
+    @param root: A Tree
+    @return: Postorder in ArrayList which contains node values.
+    """
+    def postorderTraversal(self, root):
+        # reserve - root right left
+        result = []
+        self.helper(root, result)
+        return result
+        
+    def helper(self, root, result):
+        # traverse top down 
+        if root is None:
+            return 
+        self.helper(root.left, result)
+        self.helper(root.right, result)
+        result.append(root.val)
+        return 
