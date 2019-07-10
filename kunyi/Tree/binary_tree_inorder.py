@@ -79,10 +79,11 @@ class Solution:
         current = root 
         result, stack = [], []
         while len(stack) > 0 or current is not None:
+            # push to stack
             if current is not None:
                 stack.append(current)
                 current = current.left 
-                
+            # return a stack    
             else:
                 current = stack.pop()
                 result.append(current.val)
