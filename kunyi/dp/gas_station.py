@@ -53,6 +53,8 @@ class Solution:
         while start < n:
             while total_gas < 0:
                 # start from the last end 
+                # why: if choose to start from the start + 1, total_gas -= diff[start], where diff[start] > 0
+                # whill only smaller
                 start = end 
                 end += 1
                 total_gas = diff[start]
