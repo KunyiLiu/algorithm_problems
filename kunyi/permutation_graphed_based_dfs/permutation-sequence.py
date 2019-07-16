@@ -20,3 +20,38 @@ class Solution:
             k = (k-1) % fact[n-i-1] + 1 
             
         return ''.join(result)
+    
+    
+    
+############### str list join ############
+class Solution:
+    """
+    @param n: n
+    @param k: the k th permutation
+    @return: return the k-th permutation
+    """
+    def getPermutation(self, n, k):
+        # factorization 
+        digit = n
+            
+        result = []
+        eligible = [i for i in range(n-digit+1, n+1)]
+        # O(n)
+        factorization = {0: 1}
+        self.get_fact(n, factorization)
+        while digit > 0:
+            eligible_ind = (k - 1)// factorization[digit-1]  # 3, 4 -> 1
+            result.append(str(eligible[eligible_ind]))
+            eligible.remove(eligible[eligible_ind])
+            k = (k - 1) % factorization[digit-1] + 1 
+            digit -= 1 
+            
+        return ''.join(result)
+        
+    def get_fact(self, n, memo):
+        if n in memo:
+            return memo[n]
+            
+        memo[n] = n * self.get_fact(n-1, memo)
+        
+        return memo[n]
