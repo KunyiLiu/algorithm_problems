@@ -31,4 +31,7 @@ Next challenges:
 Next Permutation
 Palindrome Permutation II
 Number of Squareful Arrays
+
+Related Topics: Backtracking
+Similar Questions: Next Permutation, Permutations, Palindrome Permutation II, Number of Squareful Arrays
 '''
