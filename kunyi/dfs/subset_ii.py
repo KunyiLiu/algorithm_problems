@@ -36,6 +36,13 @@ class Solution:
     """
     def subsetsWithDup(self, nums):
         # introduce start_ind, dont look back 
+        # start= 0 .      1 .         2 
+        # i = 0 .     i = 1 .     i = 2 
+        #    [1] .       [1,2] .     [1,2,2]
+        # pop .           [1]           [1,2]    
+        #              i = 2 not work
+        # pop  [] .       [1]
+        #  [2]
         result = []
         # point 1. sorted 
         nums = sorted(nums)
