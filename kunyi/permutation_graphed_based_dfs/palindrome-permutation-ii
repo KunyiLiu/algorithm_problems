@@ -1,0 +1,77 @@
+################## counter + result set (deduplicate) #################
+class Solution:
+    """
+    @param s: the given string
+    @return: all the palindromic permutations (without duplicates) of it
+    """
+    def generatePalindromes(self, s):
+        # write your code here
+        from collections import Counter 
+        char_count = Counter(s)
+        odd_count = sum([1 for value in char_count.values() if value%2 == 1])
+        result = set()
+        if odd_count > 1:
+            return []
+        elif odd_count == 1:
+            odd_subset = [key for key, val in char_count.items() if val%2 == 1]
+            char_count[odd_subset[0]] -= 1 
+            self.dfs(char_count, len(s), result, odd_subset)
+        else:
+            self.dfs(char_count, len(s), result, [])
+            
+        return list(result)
+        
+    def dfs(self, char_count, s_len, result, subset):
+        if len(subset) == s_len:
+            result.add(''.join(subset))
+            return 
+        
+        for char, count in char_count.items():
+            if count == 0:
+                continue 
+            subset.insert(0, char)
+            subset.append(char)
+            char_count[char] -= 2 
+            self.dfs(char_count, s_len, result, subset)
+            subset.pop(0)
+            subset.pop()
+            char_count[char] += 2 
+            
+######## determine the first left, then swap #############
+class Solution:
+    """
+    @param s: the given string
+    @return: all the palindromic permutations (without duplicates) of it
+    """
+    def generatePalindromes(self, s):
+        # write your code here
+        counter = collections.Counter(s)
+        odds = filter(lambda x: x % 2, counter.values())
+        if len(odds) > 1:
+            return []
+        baseStr, mid = self.preProcess(counter)
+        return self.backTracking(baseStr, 0, mid, [baseStr + mid + baseStr[::-1]])
+        
+    def preProcess(self, counter):
+        baseStr = mid = ""
+        for char in counter:    
+            if counter[char] % 2:
+                mid = char
+            baseStr += char*(counter[char]/2)
+        return baseStr, mid
+        
+    def backTracking(self, s, idx, mid, ans):
+        if idx == len(s) - 1:
+            return ans
+        for i in range(idx, len(s)):
+            if i >= 1 and s[i] == s[i-1] == s[idx]:
+                continue #no need to go deeper if swap would be the same
+            #Swap s[idx] with s[i]
+            if i != idx:
+                # notice s is string 
+                permu = s[:idx] + s[i] + s[idx+1:i] + s[idx] + s[i+1:] 
+                ans.append(permu + mid + permu[::-1])
+            else:
+                permu = s
+            self.backTracking(permu, idx+1, mid, ans)
+        return an
