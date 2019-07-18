@@ -72,3 +72,37 @@ class Solution:
                 break 
             
         return stack[-1].val
+
+############ current pointer + manual stack ############
+"""
+Definition of TreeNode:
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+"""
+
+class Solution:
+    """
+    @param root: the given BST
+    @param k: the given k
+    @return: the kth smallest element in BST
+    """
+    def kthSmallest(self, root, k):
+        # use stack simulate recursion
+        stack = []
+        current = root
+        count = 0
+        while len(stack) > 0 or current is not None:
+            if current is not None:
+                stack.append(current)
+                current = current.left
+            else:
+                current = stack.pop()
+                count += 1 
+                if count == k:
+                    break
+                current = current.right
+                
+        return current.val
+            
