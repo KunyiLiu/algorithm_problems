@@ -28,4 +28,7 @@ Details
 Runtime: 56 ms, faster than 86.47% of Python3 online submissions for Average of Levels in Binary Tree.
 Memory Usage: 16.2 MB, less than 23.08% of Python3 online submissions for Average of Levels in Binary Tree.
 Next challenges: Serialize and Deserialize N-ary Tree, Complete Binary Tree Inserter, Range Sum of BST
+
+Related Topics: Tree
+Similar Questions: Binary Tree Level Order Traversal, Binary Tree Level Order Traversal II
 '''
