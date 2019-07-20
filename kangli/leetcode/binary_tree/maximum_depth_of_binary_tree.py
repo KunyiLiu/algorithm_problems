@@ -32,6 +32,16 @@ class Solution2:
             return 0
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
+
+'''
+Success
+Details 
+Runtime: 68 ms, faster than 7.97% of Python3 online submissions for Maximum Depth of Binary Tree.
+Memory Usage: 16.6 MB, less than 5.03% of Python3 online submissions for Maximum Depth of Binary Tree.
+Next challenges: Balanced Binary Tree, Minimum Depth of Binary Tree, Maximum Depth of N-ary Tree
+Related Topics: Tree, Depth-first Search
+'''
+
 '''
 Submission Result: Accepted
 Next challenges: Balanced Binary Tree, Minimum Depth of Binary Tree, Maximum Depth of N-ary Tree
