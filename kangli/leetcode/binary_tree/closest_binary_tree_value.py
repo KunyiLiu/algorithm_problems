@@ -35,5 +35,5 @@ Count Complete Tree Nodes
 Closest Binary Search Tree Value II
 Search in a Binary Search Tree
 
-Related Topics: Binary Tree, Tree
+Related Topics: Binary Search, Tree
 '''
