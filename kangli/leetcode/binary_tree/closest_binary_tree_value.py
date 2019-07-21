@@ -5,6 +5,36 @@
 #         self.left = None
 #         self.right = None
 
+
+class Solution:
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        res = root.val
+        while root:
+            if abs(target-root.val) < abs(target-res):
+                res = root.val
+            if target < root.val:
+                root = root.left
+            else:
+                root = root.right
+        return res 
+
+
+'''
+Success
+Details 
+Runtime: 40 ms, faster than 94.02% of Python3 online submissions for Closest Binary Search Tree Value.
+Memory Usage: 15.7 MB, less than 5.42% of Python3 online submissions for Closest Binary Search Tree Value.
+'''
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+
 class Solution:
     def closestValue(self, root: TreeNode, target: float) -> int:
         sorted_arr = []
