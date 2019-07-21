@@ -4,6 +4,7 @@ class Solution:
     @return: true if the frog is able to cross the river or false
     """
     def canCross(self, stones):
+        # compare with LIS, dp not record the direct result
         # dp {}
         # dp[stone] set, record steps to stone.
         # inference
@@ -30,3 +31,39 @@ class Solution:
                     
                     
         return len(dp[stones[-1]]) > 0
+    
+    
+###### 
+class Solution:
+    """
+    @param stones: a list of stones' positions in sorted ascending order
+    @return: true if the frog is able to cross the river or false
+    """
+    def canCross(self, stones):
+        # def:  dp[i] - if frog can jump from 0 to index i 
+        # initial: dp[0] = True, dp[1] = True if stones[1] == 1 
+        # inference: dp[i] = True if dp[k] == True and stones(i) - stones(k) in steps[k]
+        # where k < i 
+        # result: dp[n-1]
+        # O(n^2)
+        
+        n = len(stones)
+        dp = [False] * n 
+        dp[0] = True
+        steps = {}
+        for i in range(n):
+            if i == 0:
+                steps[i] = set([0])
+            else:
+                steps[i] = set([])
+                
+        for i in range(1, n):
+            for j in range(i):
+                if dp[j] is False:
+                    continue
+                tmp_k = stones[i] - stones[j]
+                if tmp_k in steps[j] or tmp_k - 1 in steps[j] or tmp_k + 1 in steps[j]:
+                    dp[i] = True 
+                    steps[i].add(tmp_k)
+                    
+        return dp[n-1]

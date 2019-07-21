@@ -22,3 +22,71 @@ class Solution:
             
             A[son_ind], A[ind] = A[ind], A[son_ind]
             ind = son_ind
+
+######### recursion ###########
+class Solution:
+    """
+    @param: A: Given an integer array
+    @return: nothing
+    """
+    def heapify(self, A):
+        # get the parent of the last element 
+        parent = (len(A) - 1) // 2 
+        for i in range(parent, -1, -1):
+            # heapify the subtree with root i 
+            # bottom up 
+            # O(n)
+            self.heapify_root(A, i)
+        
+        return A
+        
+    def heapify_root(self, A, root):
+        # top down
+        smallest = root 
+        left_child = 2*root + 1 
+        right_child = 2*root + 2 
+        if left_child < len(A) and A[left_child] < A[smallest]:
+            smallest = left_child
+        if right_child < len(A) and A[right_child] < A[smallest]:
+            smallest = right_child
+        
+        if smallest != root:
+            A[smallest], A[root] = A[root], A[smallest]
+            self.heapify_root(A, smallest)
+            
+        return 
+    
+######## interation #########
+class Solution:
+    """
+    @param: A: Given an integer array
+    @return: nothing
+    """
+    def heapify(self, A):
+        # get the parent of the last element 
+        parent = (len(A) - 1) // 2 
+        for i in range(parent, -1, -1):
+            # heapify the subtree with root i 
+            # bottom up 
+            # O(n)
+            self.heapify_root(A, i)
+        
+        return A
+        
+    def heapify_root(self, A, root):
+        while root < len(A):
+            smallest = root 
+            left_child = 2*root + 1 
+            right_child = 2*root + 2 
+            if left_child < len(A) and A[left_child] < A[smallest]:
+                smallest = left_child
+            if right_child < len(A) and A[right_child] < A[smallest]:
+                smallest = right_child
+
+            if smallest != root:
+                A[smallest], A[root] = A[root], A[smallest]
+                root = smallest
+            else:
+                break
+            
+        return 

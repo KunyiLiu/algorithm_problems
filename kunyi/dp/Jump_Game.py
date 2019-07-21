@@ -28,6 +28,8 @@ class Solution:
         n = len(A)
         dp = [False] * n 
         dp[0] = True
+        # similar to frog jump, but frog jump needs to record steps set for every elem
+        # since it requires exactly the same 
         for i in range(1, n):
             for j in range(0, i):
                 if dp[j] and j + A[j] >= i:

@@ -57,6 +57,31 @@ class Solution:
             return
         self.lastval = root.val
         self.helper(root.right)
+        
+###### similar traverse method but in interation #########
+class Solution:
+    """
+    @param root: The root of binary tree.
+    @return: True if the binary tree is BST, or false
+    """
+    def isValidBST(self, root):
+        # BST INORDER - ascending seq
+        stack = []
+        current = root
+        last_node = None
+        while len(stack) > 0 or current is not None:
+            if current:
+                stack.append(current)
+                current = current.left 
+            else:
+                current = stack.pop()
+                # should be inserted to result 
+                if last_node and last_node.val >= current.val:
+                    return False 
+                last_node = current
+                current = current.right
+                
+        return True
 
 # method 3: iterator
      """

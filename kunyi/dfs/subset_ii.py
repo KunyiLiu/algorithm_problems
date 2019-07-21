@@ -26,3 +26,34 @@ class Solution:
             subset.pop()
             
         return 
+
+##### 
+
+class Solution:
+    """
+    @param nums: A set of numbers.
+    @return: A list of lists. All valid subsets.
+    """
+    def subsetsWithDup(self, nums):
+        # introduce start_ind, dont look back 
+        # start= 0 .      1 .         2 
+        # i = 0 .     i = 1 .     i = 2 
+        #    [1] .       [1,2] .     [1,2,2]
+        # pop .           [1]           [1,2]    
+        #              i = 2 not work
+        # pop  [] .       [1]
+        #  [2]
+        result = []
+        # point 1. sorted 
+        nums = sorted(nums)
+        self.helper(nums, result, [], 0)
+        return result 
+        
+    def helper(self, nums, result, subset, start_ind):
+        result.append(subset[:])
+        for i in range(start_ind, len(nums)):
+            if i > start_ind and nums[i] == nums[i-1]:
+                continue
+            subset.append(nums[i])
+            self.helper(nums, result, subset, i + 1)
+            subset.pop()

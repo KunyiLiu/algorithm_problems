@@ -62,3 +62,41 @@ class Solution:
         down = self.helper(row, col + 1, grid, memo)
         memo[(row, col)] =set([(i + grid[row][col]) for i in right.union(down)])
         return  memo[(row, col)]
+
+### recursion + memo #####
+class Solution:
+    """
+    @param: : an array of arrays
+    @return: the sum of all unique weighted paths
+    """
+
+    def uniqueWeightedPaths(self, grid):
+        # recursion + memo 
+        # memo[(i,j)] = set([sum of unique paths)
+        from collections import defaultdict
+        if len(grid) == 0 or len(grid[0]) == 0:
+            return 0 
+            
+        m, n = len(grid), len(grid[0])
+        memo = dict()
+        result = sum(self.helper(grid, m-1, n-1, memo))
+        return result
+        
+    # the current sum set from (0,0) to (x, y)   
+    def helper(self, grid, x, y, memo):
+        # exit
+        if x < 0 or y < 0:
+            return set()
+        # initial
+        if x == 0 and y == 0:
+            memo[(x,y)] = set([grid[0][0]])
+            return memo[(x,y)]
+            
+        if (x, y) in memo:
+            return memo[(x, y)]
+        
+        left = self.helper(grid, x-1, y, memo)
+        up = self.helper(grid, x, y-1, memo)
+        memo[(x,y)] = set([tup + grid[x][y] for tup in left.union(up)])
+        return memo[(x, y)]
+        
