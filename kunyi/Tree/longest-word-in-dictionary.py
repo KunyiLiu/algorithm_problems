@@ -61,7 +61,6 @@ class Solution(object):
                 if temp[:len(temp) - i] in words:
                     if i == len(temp) - 1:
                         return temp
-                    continue
                 else:
                     break       
         return ''
