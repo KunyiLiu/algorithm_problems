@@ -15,4 +15,6 @@ Details
 Runtime: 744 ms, faster than 72.82% of Python3 online submissions for K Closest Points to Origin.
 Memory Usage: 20.1 MB, less than 5.24% of Python3 online submissions for K Closest Points to Origin.
 Next challenges:Kth Largest Element in an Array, Top K Frequent Elements, Top K Frequent Words
+
+Related Topics: Divide and Conquer, Heap, Sort
 '''
