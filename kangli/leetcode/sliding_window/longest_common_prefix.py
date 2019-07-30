@@ -68,6 +68,16 @@ Runtime: 52 ms, faster than 14.97% of Python3 online submissions for Longest Com
 Memory Usage: 13.7 MB, less than 5.41% of Python3 online submissions for Longest Common Prefix.
 Next challenges: Multiply Strings, Special Binary String, Longest Repeating Substring
 '''
+
+'''
+Success
+Details 
+Runtime: 36 ms, faster than 89.76% of Python3 online submissions for Longest Common Prefix.
+Memory Usage: 13.9 MB, less than 5.41% of Python3 online submissions for Longest Common Prefix.
+Next challenges: Word Subsets, Stamping The Sequence, Longest Repeating Substring
+'''
+
+
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         if len(strs) == 0:
