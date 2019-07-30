@@ -20,4 +20,6 @@ Runtime: 36 ms, faster than 78.07% of Python3 online submissions for Valid Paren
 Memory Usage: 14 MB, less than 5.00% of Python3 online submissions for Valid Parentheses.
 Next challenges: Generate Parentheses, Longest Valid Parentheses, Remove Invalid Parentheses
 Check If Word Is Valid After Substitutions
+
+Related Topics: String, Stack
 '''
