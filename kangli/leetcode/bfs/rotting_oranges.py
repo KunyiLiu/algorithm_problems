@@ -1,3 +1,37 @@
+class Solution(object):
+    def orangesRotting(self, grid):
+        
+        n,m = len(grid), len(grid[0])
+        queue = collections.deque([])
+        fresh_count = 0
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == 1:
+                    fresh_count += 1
+                elif grid[i][j] == 2: 
+                    queue.append((i,j))
+        res = 0
+        while queue:
+            for _ in range(len(queue)):
+                r, c = queue.popleft()
+                for nr, nc in [(r+1, c), (r-1, c), (r, c+1), (r, c-1)]:
+                    if 0 <= nr < n and 0 <= nc < m and grid[nr][nc] == 1:
+                        grid[nr][nc] = 2
+                        fresh_count -= 1
+                        queue.append((nr, nc))
+            res += 1
+        return max(0, res-1) if fresh_count == 0 else -1
+
+
+'''
+Success
+Details 
+Runtime: 48 ms, faster than 99.44% of Python3 online submissions for Rotting Oranges.
+Memory Usage: 13.7 MB, less than 5.49% of Python3 online submissions for Rotting Oranges.
+Next challenges: Walls and Gates
+'''
+
+
 class Solution:
     def orangesRotting(self, grid):
         m, n = len(grid), len(grid[0])
