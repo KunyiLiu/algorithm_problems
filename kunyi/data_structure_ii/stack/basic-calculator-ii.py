@@ -47,4 +47,43 @@ class Solution:
                 result += tmp
             
         return result 
+################# num sign #################3
+class Solution:
+    """
+    @param s: the given expression
+    @return: the result of expression
+    """
+    def calculate(self, s):
+        # convert s to a list of nums 
+        # 123 -> 123, - 123, 
+        # *// -> pop the last elemenet and input the calculated one 
+        # O(N)
+        if s == '' or s is None:
+            return 0 
+            
+        num, s, sign = 0, s.strip(), '+'
+        stack = []
+        for i, char in enumerate(s):
+            if char.isdigit():
+                num = num * 10 + int(char)
+            if char in ['+', '-', '*', '/'] or i == len(s) - 1:
+                if sign == '+':
+                    stack.append(num)
+                elif sign == '-':
+                    stack.append(-num)
+                elif sign == '*':
+                    tmp = stack.pop() * num 
+                    stack.append(tmp)
+                elif sign == '/':
+                    # -3// 4 = - 1 
+                    tmp = stack.pop()
+                    tmp = - (abs(tmp) // num) if tmp < 0 else tmp // num 
+                    stack.append(tmp)
+                else:
+                    stack.append(num)
+                
+                sign = char   
+                num = 0 
+       
+        return sum(stack)
             
