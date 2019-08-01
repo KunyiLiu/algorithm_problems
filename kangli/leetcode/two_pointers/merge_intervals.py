@@ -24,4 +24,8 @@ Runtime: 120 ms, faster than 11.08% of Python3 online submissions for Merge Inte
 Memory Usage: 15.9 MB, less than 5.10% of Python3 online submissions for Merge Intervals.
 Next challenges: Insert Interval, Meeting Rooms II, Teemo Attacking, Add Bold Tag in String, Range Module, 
 Employee Free Time, Partition Labels
+
+Related Topics: Array, Sort
+Similar Questions: Insert Interval, Meeting Rooms, Meeting Rooms II, Teemo Attacking, Add Bold Tag in String, 
+Range Module, Employee Free Time, Partition Labels, Interval List Intersections
 '''
