@@ -1,3 +1,37 @@
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        island_count = 0 
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == '1':
+                    self.bfs(grid, i, j)
+                    island_count += 1
+        return island_count
+    
+    def bfs(self, grid, r, c):
+        from collections import deque 
+        queue = deque([(r, c)])
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        m, n = len(grid), len(grid[0])
+        while queue:
+            r, c = queue.popleft()
+            for d in directions:
+                nr, nc = r+d[0], c+d[1]
+                if 0 <= nr < m and 0 <= nc <n and grid[nr][nc] == '1':
+                    queue.append((nr, nc))
+                    grid[nr][nc] = 'x'
+                    
+                    
+'''
+Success
+Details 
+Runtime: 144 ms, faster than 92.18% of Python3 online submissions for Number of Islands.
+Memory Usage: 14.9 MB, less than 18.84% of Python3 online submissions for Number of Islands.
+Next challenges: Walls and Gates, Number of Islands II, Number of Connected Components in an Undirected Graph,
+Number of Distinct Islands, Max Area of Island
+'''
+
+
 '''
 Given a 2d grid map of 1's and 0's, count the number of groups of 1's (islands).
 Similar questions: Walls and Gates, Number of Islands II, Number of Connected Components in an Undirected Graph,
