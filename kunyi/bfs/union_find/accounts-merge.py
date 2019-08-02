@@ -20,7 +20,8 @@ class Solution:
         return 
         
     def accountsMerge(self, accounts):
-        # time - O(#emails) space - O(#emails)
+        # time - O(#emails * # accounts) space - O(#emails)
+        # # accounts - cost time of union and find operations
         from collections import defaultdict
         if accounts is None or len(accounts) == 0:
             return []
