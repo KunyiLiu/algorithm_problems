@@ -1,4 +1,39 @@
 class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        max_area = 0
+        for i in range(len(grid)): # add all 1's to queue
+            for j in range(len(grid[0])):
+                if grid[i][j] == 1:
+                    max_area = max(max_area, self.bfs(grid, i, j))
+        return max_area 
+    
+    def bfs(self, grid, r, c):
+        from collections import deque 
+        queue = deque([(r, c)])
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        m, n, area = len(grid), len(grid[0]), 0 
+        while queue:
+            r, c = queue.popleft()
+            grid[r][c] = 2
+            area += 1 
+            for d in directions:
+                nr, nc = r+d[0], c+d[1]
+                if 0 <= nr < m and 0<= nc < n and grid[nr][nc] == 1:
+                    queue.append((nr, nc))
+                    grid[nr][nc] = 2 
+        return area 
+                    
+
+'''
+Success
+Details 
+Runtime: 152 ms, faster than 78.65% of Python3 online submissions for Max Area of Island.
+Memory Usage: 14.1 MB, less than 72.17% of Python3 online submissions for Max Area of Island.
+Next challenges: Island Perimeter
+'''
+
+
+class Solution:
     def maxAreaOfIsland(self, grid):
         max_area = 0 
         seen = set()
