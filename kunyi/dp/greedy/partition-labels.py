@@ -32,3 +32,17 @@ class Solution:
             
         self.helper(S, char_count, i + 1, visited)
         return 
+
+##### use map to record the last ind of char 
+class Solution(object):
+    def partitionLabels(self, S):
+        last = {c: i for i, c in enumerate(S)}
+        right = left = 0
+        ans = []
+        for i, c in enumerate(S):
+            right = max(right, last[c])
+            if i == right:
+                ans.append(i - left + 1)
+                left = i + 1
+            
+        return ans
