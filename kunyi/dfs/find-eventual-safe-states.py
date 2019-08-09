@@ -1,4 +1,6 @@
-#### space/time: O(V+E) traveres all nodes and edges #######
+#### time: O(V+E) traveres all nodes and edges #######
+### classic "white-gray-black" DFS algorithm
+#### exit our search quickly when we find a cycle - say the result of visiting a node is true if it is eventually safe, otherwise false
 
 class Solution:
     """
