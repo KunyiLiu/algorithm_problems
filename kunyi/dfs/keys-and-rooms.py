@@ -40,3 +40,21 @@ class Solution:
             self.dfs(ind, rooms, visited)
             
         return 
+    
+##### bit wise algo ##
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        visited = 0
+        ct = 0
+        to_visit = [0]
+		
+        while to_visit:
+            room = to_visit.pop()
+			
+            mask = 1 << room
+            if visited & mask: continue
+			
+            visited |= mask
+            ct += 1
+            to_visit.extend(rooms[room])
+			
+        return ct == len(rooms)
