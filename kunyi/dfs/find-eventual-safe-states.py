@@ -34,3 +34,37 @@ class Solution:
             
         self.ans.add(start)        
         return True
+
+########
+class Solution:
+    """
+    @param graph: a 2D integers array
+    @return: return a list of integers
+    """
+    def eventualSafeNodes(self, graph):
+        # record the nodes that dont walk in cycles
+        # white - not started node, grey - started but not confirmed to be valid
+        # black - valid nodes 
+        """
+            the only possibilities are that we've marked the entire subtree black (which must be eventually safe), or it has a cycle and we have only marked the members of that cycle gray.
+        """
+        if graph is None or len(graph) == 0:
+            return []
+        n = len(graph)
+        colors = [0] * n 
+        for i in range(n):
+            if colors[i] == 0:
+                self.dfs(i, colors, graph)
+            
+        return [ind for ind, color in enumerate(colors) if color == 2]
+        
+    def dfs(self, start, colors, graph):
+        colors[start] = 1 
+        for ind in graph[start]:
+            if colors[ind] == 0 and not self.dfs(ind, colors, graph):
+                return False 
+            elif colors[ind] != 2:
+                return False
+                
+        colors[start] = 2 
+        return True
