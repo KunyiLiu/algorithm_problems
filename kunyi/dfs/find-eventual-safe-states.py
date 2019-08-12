@@ -59,6 +59,7 @@ class Solution:
         return [ind for ind, color in enumerate(colors) if color == 2]
         
     def dfs(self, start, colors, graph):
+        # if remain gray/1 after dfs, means if it is not valid
         colors[start] = 1 
         for ind in graph[start]:
             if colors[ind] == 0 and not self.dfs(ind, colors, graph):
