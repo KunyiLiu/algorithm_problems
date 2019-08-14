@@ -28,4 +28,7 @@ Details
 Runtime: 656 ms, faster than 41.80% of Python3 online submissions for Maximum Depth of N-ary Tree.
 Memory Usage: 95.3 MB, less than 8.33% of Python3 online submissions for Maximum Depth of N-ary Tree.
 Next challenges: Delete Node in a BST, Freedom Trail, Binary Tree Pruning
+
+Related Topics: Tree, Depth-first Search, Breadth-first Search
+Similar Questions: Maximum Depth of Binary Tree
 '''
