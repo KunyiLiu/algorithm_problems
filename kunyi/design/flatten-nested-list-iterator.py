@@ -62,7 +62,7 @@ class NestedIterator(object):
         
     # @return {boolean} true if the iteration has more element or false
     def hasNext(self):
-    # time: O(h) - depth of iterator, space: O(N)
+    # time: O(N) - visit every item in the list, space: O(N)
         if self.next_elem:
             return True
             
@@ -74,3 +74,35 @@ class NestedIterator(object):
             for elem in reversed(top.getList()):
                 self.stack.append(elem)
         return False
+
+##########
+class NestedIterator(object):
+
+    def __init__(self, nestedList):
+        # use stack to record Net, use next_item to record the Net with isInteger is True 
+        # hasNext - reversedly put Net to stack [Net3, Net2, Net1]
+        # pop Net1, [Net3, Net2, Net1.2, Net1.1], if Net1.1 isInteger is True, pop and update next_item
+        self.stack = nestedList
+        self.next_item = None 
+        
+    # @return {int} the next element in the iteration
+    def next(self):
+        return self.next_item.getInteger()
+        
+    # @return {boolean} true if the iteration has more element or false
+    def hasNext(self):
+        # Write your code here
+        while len(self.stack) > 0:
+            current_net = self.stack.pop()
+            if current_net.isInteger():
+                self.next_item = current_net
+                return True 
+                
+            for net in reversed(current_net.getList()):
+                self.stack.append(net)
+                
+        return False 
+
+# Your NestedIterator object will be instantiated and called as such:
+# i, v = NestedIterator(nestedList), []
+# while i.hasNext(): v.append(i.next())
