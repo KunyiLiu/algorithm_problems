@@ -75,3 +75,44 @@ class Solution:
                 stack = stack[:-2]
         result += sign * number
         return result
+    
+    
+#### 
+class Solution:
+    """
+    @param s: the given expression
+    @return: the result of expression
+    """
+    def calculate(self, s):
+        # result, stack, num, sign 
+        result, num = 0, 0 
+        stack, sign = [], '+'
+        
+        s = s.strip()
+        for i, char in enumerate(s):
+            if char.isdigit():
+                num = num * 10 + int(char)
+            if char in ['+', '-', ')'] or i == len(s) - 1:
+                if sign == '+':
+                    result += num 
+                if sign == '-':
+                    result -= num 
+                if char in ['+', '-']:
+                    sign = char 
+                num = 0 
+                
+            if char == '(':
+                stack.append(result)
+                stack.append(sign)
+                sign = '+'
+                result = 0 
+                
+            if char == ')':
+                sign = stack.pop()
+                tmp = stack.pop()
+                if sign == '+':
+                    result = tmp + result 
+                if sign == '-':
+                    result = tmp - result 
+                    
+        return result 
