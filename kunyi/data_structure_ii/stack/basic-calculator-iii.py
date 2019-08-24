@@ -11,6 +11,7 @@ class Solution:
     def helper(self, s):
         stack, sign = [], '+'
         s = s.strip()
+        # exit is sign != ')' not s[self.ind] != ')'
         while self.ind < len(s) and sign != ')':
             if s[self.ind] == ' ':
                 self.ind += 1 
