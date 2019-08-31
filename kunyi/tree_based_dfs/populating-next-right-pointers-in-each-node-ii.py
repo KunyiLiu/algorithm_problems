@@ -1,4 +1,4 @@
-# reset cur and dummy
+# reset cur(pointer for the same layer) and dummy(to record the first node for the next layer), node(next layer)
 # Time O(N), space O(1)
 class Solution(object):
     def connect(self, root):
