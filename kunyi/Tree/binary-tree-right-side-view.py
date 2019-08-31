@@ -1,3 +1,5 @@
+######### Time: O(n), space: O(n)  traverse ######
+
 """
 Definition of TreeNode:
 class TreeNode:
