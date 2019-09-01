@@ -21,12 +21,12 @@ class Solution:
         if root.val == value:
             if root.left is None:
                 tmp = root.right
-                root = None
+                # root = None
                 return tmp 
                 
             if root.right is None:
                 tmp = root.left
-                root = None 
+                # root = None 
                 return tmp 
             
             # get inorder successor and move it to the root 
