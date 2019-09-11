@@ -29,7 +29,10 @@ class Solution:
                 l += 1 
                 r -= 1 
         
+        # kth <= l - 1 
+        # kth >= l
         if l <= kth:
             return self.find_median(nums, l, end, kth)
         else:
             return self.find_median(nums, start, l-1, kth)
+        
