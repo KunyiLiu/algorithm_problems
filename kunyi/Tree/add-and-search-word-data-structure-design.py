@@ -50,7 +50,7 @@ class WordDictionary:
         
 #  using recursion, less space (stack space can be ignored, or use tail recursion to improve process). 
 #  cons: may cause stackoverflow 
-#  In python, even with tail recursion(call function itself), will not have any effect
+# In python, even with tail recursion(call function itself), will not have any effect
 # where the function calls itself at the end ("tail") of the function in which no computation is done
 # after the return of recursive call.
 
