@@ -15,6 +15,8 @@ class Solution:
         # if 2, non-swap[i] = min(non-swap[i], swap[i-1]), dont need to do swap 
         #       swap[i] = min(non-swap[i], non-swap[i-1] + 1)
         # notice it can occur at the same time 
+        if len(A) == 0 or len(B) == 0:
+            return 0
         import sys
         max_int = sys.maxsize
         n = len(A)
