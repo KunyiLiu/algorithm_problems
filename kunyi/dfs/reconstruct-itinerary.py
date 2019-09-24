@@ -39,3 +39,27 @@ class Solution:
             else:
                 result.append(latest_flight)
                 stack.pop()
+### 
+class Solution:
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        if tickets is None or len(tickets) == 0:
+            return []
+        
+        tickets = sorted(tickets)  # in lexical order
+        result = self.helper(tickets, ['JFK'])
+        return result 
+    
+    def helper(self, tickets, result):
+        if len(tickets) == 0:
+            return result
+        
+        last_dest = result[-1]
+        for i, (source, dest) in enumerate(tickets):
+            if source == last_dest:
+                result.append(dest)
+                stack_result =  self.helper(tickets[:i] + tickets[(i+1):], result)
+                ## Error 
+                if stack_result: return stack_result
+                result.pop()
+                
+        return
