@@ -35,3 +35,32 @@ class Solution:
             sub_result.pop()
         
         return 
+
+# BFS
+class Solution:
+    """
+    @param root: a binary tree
+    @param sum: the sum
+    @return: the scheme
+    """
+    def pathSum(self, root, target):
+        # iterative BFS (preorder traverse)
+        # edge case: not exists/ null root 
+        # 
+        if root is None:
+            return []
+            
+        queue = [(root, [root.val])]
+        result = []
+        while queue:
+            node, path = queue.pop(0)
+            if node.left is None and node.right is None and sum(path) == target:
+                result.append(path)
+                
+            if node.left:
+                queue.append((node.left, path + [node.left.val]))
+            
+            if node.right:
+                queue.append((node.right, path + [node.right.val]))
+        
+        return result 
