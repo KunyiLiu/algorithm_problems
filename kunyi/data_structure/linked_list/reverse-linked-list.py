@@ -23,3 +23,23 @@ class Solution:
             curr.next = last
             curr, last = next, curr 
         return last
+
+###### . recursive #####
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        # bottom up
+        if head is None:
+            return
+        if head.next is None:
+            return head
+        cur = self.reverseList(head.next)
+        node = cur
+        while node.next:
+            node = node.next
+        node.next = head
+        head.next = None
+        return cur
