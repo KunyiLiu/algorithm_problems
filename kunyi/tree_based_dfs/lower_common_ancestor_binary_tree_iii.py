@@ -16,6 +16,7 @@ class Solution:
     """
     def lowestCommonAncestorII(self, root, A, B):
         # use dict to record its path from A to root 
+        # first common parent
         hash_set = set()
         while A is not None:
             hash_set.add(A)
