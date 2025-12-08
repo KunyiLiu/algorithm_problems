@@ -30,6 +30,9 @@ class Solution:
         if nums[start] > nums[mid]:
             nums[start], nums[mid] = nums[mid], nums[start]
 
+        # move median-of-three to pivot position
+        nums[start], nums[mid] = nums[mid], nums[start]
+
         pivot_ind = start
         pivot = nums[start]
         start += 1
