@@ -1,6 +1,9 @@
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
-        # use partition sort 
+        # first build max heap (from sub-parent to parent).
+        # then sorted the array based on this max heap. swap the end num with the 0th num, 
+        # and restore the remaining elements to heap (size - 1) => similar to heappop.
+        # Time complexity: O(nlogn), Space: O(logn)
         n = len(nums)
         if n <= 1:
             return nums
