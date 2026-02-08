@@ -45,3 +45,15 @@ class Solution:
             non_zero += 1 
             
         return nums
+
+#### partition sorting #######
+class Solution:
+    def move_zeroes(self.nums):
+        # l: boundary for non-zeroes (the "Left" bucket)
+        # i: explorer pointer
+        l = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                # Swap current non-zero to the left boundary
+                nums[l], nums[i] = nums[i], nums[l]
+                l += 1
