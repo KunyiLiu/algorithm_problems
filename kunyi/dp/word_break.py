@@ -17,3 +17,35 @@ class Solution:
                     dp[i] = True 
                     
         return dp[n]
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        # dfs: from start, put "cats" and "cat" to the stack
+        # once cats is popped from stack, check the next available words from the next ind,
+        # put "in" to the stack, then put "car", but then no matched words from the remaining words, the ind havn't hit n
+
+        # memo[i] - if s[i:] can be segmented.
+        # time complexity: O(N * M * w), Space: O(N + M), N is the length of s, M is the wordDict number, w is the max length of words (slicing)
+        n = len(s)
+        wordDict = set(wordDict)
+        # cache for start index → True/False
+        memo = {}
+        
+        def dfs(start):
+            if start >= n:
+                return True
+            
+            if start in memo:
+                return memo[start]
+
+            for w in wordDict:
+                if (start + len(w)) <= n and s[start: start + len(w)] == w:
+                    if dfs(start + len(w)):
+                        memo[start] = True
+                        return True
+
+            memo[start] = False
+            return False
+
+        result = dfs(0)
+        return result
