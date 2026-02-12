@@ -49,3 +49,26 @@ class Solution:
 
         result = dfs(0)
         return result
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        # dp[i] = can segment s[i:]
+        # base: dp[n] = True, inference: dp[i] = dp[i + len(w)] if w exist in wordDict
+        # result: dp[0]
+        n = len(s)
+        dp = [False] * (n + 1)
+        dp[n] = True
+        
+        for i in range(n - 1, -1, -1):
+            for w in wordDict:
+                if i + len(w) <= n and s[i : i + len(w)] == w:
+                    dp[i] = dp[i + len(w)]
+
+                if dp[i]:
+                    break
+
+        return dp[0]
+
+
+
