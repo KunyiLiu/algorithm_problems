@@ -73,3 +73,28 @@ class Solution:
                 jumps += 1
         
         return jumps
+
+
+####   Corrected: BFS + Greedy #####
+#### Time: O(n), Space: O(1) #####
+
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        if nums is None or len(nums) <= 1:
+            return 0 
+        
+        # level BFS. Use l, r to signal the jump range of each step; Visited - l = r + 1
+        l, r = 0, 0
+        jumps = 0
+
+        # last ind is len(nums) - 1, break condition >= last ind
+        while r < len(nums) - 1:
+            farthest = 0
+            for i in range(l, r + 1):
+                farthest = max(farthest, i + nums[i])
+
+            l = r + 1
+            r = farthest
+            jumps += 1
+        
+        return jumps
