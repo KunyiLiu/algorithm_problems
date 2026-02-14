@@ -1,49 +1,77 @@
+########   Hashmap + linked list, operations - O(1)    ########
 class Node:
-    def __init__(self, key):
-        self.key = key 
-        self._next = None
-        
-class DataStream:
-    
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class FirstUnique:
     def __init__(self):
-        # do intialization if necessary
+        # Dummy head to avoid null checks for the first element
         self.head = Node(0)
         self.tail = self.head
-        self.keyToPrev = {}
-        self.duplicates = set()
         
-    def moveToTail(self, prev):
-        # from: prev -> node -> next -> ... -> tail
-        # to: prev -> next -> .. -> tail 
-        prev._next = prev._next._next 
-        if prev._next:
-            self.keyToPrev[prev._next.key] = prev 
+        # key -> the node BEFORE the one containing key
+        # This allows O(1) removal in a Singly Linked List
+        self.key_to_prev = {}
+        self.duplicates = set()
+
+    def _remove(self, num):
+        prev = self.key_to_prev[num]
+        node_to_remove = prev.next
+        
+        # Bypass the node
+        prev.next = node_to_remove.next
+        
+        # If we removed the tail, update the tail pointer to the previous node
+        if prev.next is None:
+            self.tail = prev
         else:
-            # special case node is tail 
-            self.tail = prev 
+            # If there's a next node, update its entry in our map
+            self.key_to_prev[prev.next.val] = prev
+            
+        # Clean up the map so we don't try to remove it again
+        del self.key_to_prev[num]
 
-    """
-    @param num: next number in stream
-    @return: nothing
-    """
     def add(self, num):
-        # write your code here
-        if num not in self.duplicates:
-            if num in self.keyToPrev:
-                prev = self.keyToPrev[num]
-                self.moveToTail(prev)
-                self.duplicates.add(num)
-            else:
-                node = Node(num)
-                self.tail._next = node
-                self.keyToPrev[node.key] = self.tail 
-                self.tail = node
+        if num in self.duplicates:
+            return
+        
+        if num in self.key_to_prev:
+            # It was unique, now it's a duplicate. Remove it!
+            self._remove(num)
+            self.duplicates.add(num)
+        else:
+            # First time seeing it. Add to tail.
+            new_node = Node(num)
+            self.key_to_prev[num] = self.tail
+            self.tail.next = new_node
+            self.tail = new_node
 
-    """
-    @return: the first unique number in stream
-    """
-    def firstUnique(self):
-        # write your code here
-        if self.head._next is None:
-            return -1 
-        return self.head._next.key
+    def showFirstUnique(self):
+        if self.head.next:
+            return self.head.next.val
+        return -1
+
+
+######  OrderDict - O(1) remove #####
+from collections import OrderedDict
+
+class FirstUnique:
+    def __init__(self):
+        self.unique_chars = OrderedDict()
+        self.duplicates = set()
+
+    def add(self, num):
+        if num in self.duplicates:
+            return
+        if num in self.unique_chars:
+            del self.unique_chars[num]
+            self.duplicates.add(num)
+        else:
+            self.unique_chars[num] = True
+
+    def showFirstUnique(self):
+        # The first key in OrderedDict is the oldest unique
+        if self.unique_chars:
+            return next(iter(self.unique_chars))
+        return -1
