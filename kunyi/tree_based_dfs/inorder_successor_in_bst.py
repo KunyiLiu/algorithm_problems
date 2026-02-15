@@ -7,25 +7,30 @@ class TreeNode(object):
         self.right = None
 """
 
+class Solution:
+    def inorderSuccessor(self, root, p):
+        if not root:
+            return None
+        
+        # If root is less than or equal to p, the successor MUST be in the right
+        if root.val <= p.val:
+            return self.inorderSuccessor(root.right, p)
+        
+        # If root is greater than p, the successor is either in the left
+        # OR it is the root itself (if left returns None)
+        left = self.inorderSuccessor(root.left, p)
+        return left if left else root
+
 
 class Solution:
-    """
-    @param: root: The root of the BST.
-    @param: p: You need find the successor node of p.
-    @return: Successor of p.
-    """
     def inorderSuccessor(self, root, p):
-        # p in function keep the same?
-        if root is None:
-            return
-        if p.val >= root.val:
-            return self.inorderSuccessor(root.right, p)
-        else:
-            # if p < root, 
-            # if left subtree exist then find in the right subtree
-            # otherwize itself
-            tmp = self.inorderSuccessor(root.left, p)
-            if tmp:
-                return tmp
+        successor = None
+        while root:
+            if root.val > p.val:
+                # Potential candidate! Save it and look for something smaller
+                successor = root
+                root = root.left
             else:
-                return root
+                # Too small, must look in the right
+                root = root.right
+        return successor
