@@ -1,29 +1,19 @@
-"""
-Definition of TreeNode:
-class TreeNode:
-    def __init__(self, val):
-        self.val = val
-        self.left, self.right = None, None
-"""
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
 class Solution:
-    """
-    @param root: root of the tree
-    @param p: the node p
-    @param q: the node q
-    @return: find the LCA of p and q
-    """
-    def lowestCommonAncestor(self, root, p, q):
-        # write your code here
-        if not all([root, p, q]):
-            return None 
-        
-        smaller_val = min(p.val, q.val)
-        larger_val = max(p.val, q.val)
-        while True:
-            if smaller_val <= root.val and larger_val >= root.val:
-                return root 
-            if smaller_val > root.val:
-                root = root.right 
-            if larger_val < root.val:
-                root = root.left 
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        # Time: O(h), Space:: O(1)
+        cur = root
+        while cur:
+            if p.val < cur.val and q.val < cur.val:
+                # p, q both in left subtree
+                cur = cur.left
+            elif p.val > cur.val and q.val > cur.val:
+                cur = cur.right
+            else:
+                return cur
