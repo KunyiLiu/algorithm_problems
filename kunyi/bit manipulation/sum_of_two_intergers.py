@@ -1,0 +1,19 @@
+class Solution:
+    def getSum(self, a: int, b: int) -> int:
+        # In Python, left-shifting never truncates, 
+        # so carry can grow without bound (or sign/bit-layout differs)
+        # emulate the python integer to fixed-len 32 bit, as carry might never be 0
+        mask = 0xFFFFFFFF
+        max_int = 0x7FFFFFFF
+
+        a &= mask
+        b &= mask
+
+        while b != 0:
+            carry = (a & b) << 1
+            a = (a ^ b) 
+            b = carry & mask     # must mask
+
+        return a if a <= max_int else ~(a ^ mask)
+
+
