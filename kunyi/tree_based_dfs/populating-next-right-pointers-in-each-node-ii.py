@@ -1,3 +1,30 @@
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        curr = root # The node we are on in the "parent" level
+        
+        while curr:
+            # dummy head for the next level
+            dummy = Node(0)
+            # 'prev' is the needle that will sew the next level together
+            prev = dummy
+            
+            # Walk across the current level
+            while curr:
+                if curr.left:
+                    prev.next = curr.left
+                    prev = prev.next
+                if curr.right:
+                    prev.next = curr.right
+                    prev = prev.next
+                # Move across the parent level
+                curr = curr.next
+            
+            # Move curr down to the start of the next level we just sewed
+            curr = dummy.next
+            
+        return root
+        
+
 # reset cur(pointer for the same layer) and dummy(to record the first node for the next layer), node(next layer)
 # Time O(N), space O(1)
 class Solution(object):
