@@ -29,4 +29,33 @@ class Solution:
             prev = prev.left 
             
         return root
+
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        
+        # 'level_start' always points to the first node of the level we are currently ON
+        level_start = root
+        
+        # If there's no left child, we are at the leaf level, so we stop
+        while level_start.left:
+            # 'curr' walks across the already-connected level_start level
+            curr = level_start
+            while curr:
+                # 1. Connect children of the same parent
+                curr.left.next = curr.right
+                
+                # 2. Connect the right child to the neighbor's left child
+                if curr.next:
+                    curr.right.next = curr.next.left
+                
+                # Move 'curr' to the right using the next pointer
+                curr = curr.next
+            
+            # Move down to the next level's beginning
+            level_start = level_start.left
+            
+        return root
         
