@@ -18,3 +18,15 @@ class Solution:
         return a if a <= max_int else ~(a ^ mask)
 
 
+# how about a - b, -b = ~b + 1 using two's complement
+
+def getSubtraction(self, a, b):
+    mask = 0xFFFFFFFF
+    
+    # Step 1: Get Two's Complement of b (-b = ~b + 1)
+    # We use our bitwise adder logic to perform the "+ 1"
+    negative_b = self.getSum(~b, 1)
+    
+    # Step 2: Perform a + (-b)
+    return self.getSum(a, negative_b)
+
