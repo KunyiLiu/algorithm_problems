@@ -6,6 +6,7 @@ class Solution:
         mask = 0xFFFFFFFF
         max_int = 0x7FFFFFFF
 
+        # a here represents the partial sum without carry, while b represents the carry that will be processed in the next step
         a &= mask
         b &= mask
 
