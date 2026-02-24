@@ -1,3 +1,27 @@
+######   Greedy O(n) ######
+
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        if sum(gas) < sum(cost):
+            return -1
+
+        # find the first station that can reach the end of the array without the tank ever dipping below zero.
+        # if A - B can pass, then at least there is some gas left, but to C failed, meaning it could not work either even starting from A - C.
+        # so reset the first stop
+        result = 0
+        total_gas = 0
+
+        for i in range(len(gas)):
+            total_gas += (gas[i] - cost[i])
+            if total_gas < 0:
+                # reset
+                total_gas = 0
+                result = i + 1
+
+        return result
+
+
+
 ################### TLE #####################
 class Solution:
     """
