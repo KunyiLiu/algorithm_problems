@@ -86,6 +86,7 @@ class Solution:
 
         for num in nums:
             # iterate backward to prevent reusing the same number
+            # if I choose to take num in the subset
             for t in range(target, num - 1, -1):
                 dp[t] |= dp[t - num]
 
