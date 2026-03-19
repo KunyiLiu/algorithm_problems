@@ -5,6 +5,26 @@ class TreeNode:
         self.val = val
         self.left, self.right = None, None
 """
+
+####  left: non-inclusive left boundary of tree; right: non-inclusive right boundary of tree  #####
+
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def valid(node, left, right):
+            if not node:
+                return True
+            if not (left < node.val < right):
+                return False
+
+            return valid(node.left, left, node.val) and valid(
+                node.right, node.val, right
+            )
+
+        return valid(root, float("-inf"), float("inf"))
+
+
+
 # recursion + min/max of subtree
 class Solution:
     """
