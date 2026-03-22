@@ -6,30 +6,30 @@ class TreeNode:
         self.left, self.right = None, None
 """
 
+
 class Solution:
-    """
-    @param root: The root of binary tree.
-    @return: An integer
-    """
-    def maxPathSum(self, root):
-        # find the lonest and second longest path sum 
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        # bottom up method - helper(root) returns Max Downward Path starting at this node
+        # Note! “What is the best path I can give to my parent?”
+        # parent can only attach one side to keep the path valid.
+        # Have self.result to get the max of all the Max Path Through This Node
+        # Time: O(n)
         if root is None:
-            return 0 
-            
-        max_path, _ = self.helper(root)
-        return max_path
-        
+            return 0
+
+        self.result = float('-inf')
+        self.helper(root)
+
+        return self.result
+
     def helper(self, root):
-        # max_path - can be any node to any node, at least one node 
-        # single_path - from root to any, can with no node 
-        import sys 
         if root is None:
-            return -sys.maxsize, 0 
-            
-        left = self.helper(root.left)
-        right = self.helper(root.right)
-        
-        single_path = max(0, left[1] + root.val, right[1] + root.val)
-        max_path = max(left[0], right[0], left[1] + right[1] + root.val)
-        
-        return max_path, single_path
+            return 0
+
+        left_max = max(self.helper(root.left), 0)
+        right_max = max(self.helper(root.right), 0)
+
+        self.result = max(self.result, root.val + left_max + right_max)
+
+        # only choose 1 path upward
+        return root.val + max(left_max, right_max)
