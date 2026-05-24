@@ -75,3 +75,45 @@ class Solution:
             if not dsu.union(u, v):
                 return False
         return dsu.components() == 1
+
+########   DFS #########
+
+class Solution:
+    from collections import deque
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        # 1. if all the nodes are connected; 2. No cycle;
+        # use BFS to traverse all nodes; use visited to ensure the node not double visited.
+        # Use adj list for unconnected graph, since it records both {u: v} as well as {v: u}.
+        # include (node, parent) in the BFS queue
+        # Time/Space complexity: O(V + E) 
+        if len(edges) < n - 1:
+            return False
+
+        adj_list = {i: [] for i in range(n)}
+        for u, v in edges:
+            # undirected
+            adj_list[u].append(v)
+            adj_list[v].append(u)
+
+        visited = set()
+        if not self.dfs(0, -1, adj_list, visited):
+            return False
+
+        return len(visited) == n 
+
+    def dfs(self, i, parent, adj_list, visited):
+        # start from node i, check if there is duplicate node existing in each path
+        visited.add(i)
+
+        for nei in adj_list[i]:
+            if nei == parent:
+                continue
+
+            if nei in visited:
+                return False
+                # a - b - a
+            
+            if not self.dfs(nei, i, adj_list, visited):
+                return False
+
+        return True
