@@ -27,3 +27,48 @@
             if dep_name not in visited:
                 dep_task = self._tasks[dep_name]
                 self._dfs_check(dep_task, visited, rec_stack)
+
+
+
+# golden example
+
+from typing import List, Dict
+
+class DirectedGraphCycleDetector:
+    def has_cycle(self, num_nodes: int, prerequisites: List[List[int]]) -> bool:
+        # Step 1: Build the adjacency list
+        adj_list = {i: [] for i in range(num_nodes)}
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+            
+        # Step 2: Initialize states for all nodes (0 = Unvisited)
+        state = {i: 0 for i in range(num_nodes)}
+        
+        # Step 3: Helper function for DFS
+        def dfs(node: int) -> bool:
+            # If we hit a node currently being visited, we found a cycle!
+            if state[node] == 1:
+                return True
+            # If the node is already fully processed, no need to visit again
+            if state[node] == 2:
+                return False
+            
+            # Mark the node as "Visiting" (push to recursion stack)
+            state[node] = 1
+            
+            # Recurse for all neighbors
+            for neighbor in adj_list[node]:
+                if dfs(neighbor):
+                    return True # Cycle detected downstream
+                    
+            # Mark the node as "Fully Processed" (pop from recursion stack)
+            state[node] = 2
+            return False
+
+        # Step 4: Run DFS from every node to cover disconnected components
+        for current_node in range(num_nodes):
+            if state[current_node] == 0:
+                if dfs(current_node):
+                    return True # Cycle found somewhere in the graph
+                    
+        return False # Graph is a valid DAG (No cycles)
