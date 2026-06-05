@@ -49,6 +49,7 @@ class Graph:
             i_subset = self.find(subsets, i)
             for j in self.graph[i]:
                 j_subset = self.find(subsets, j)
+                # Before we even looked at the edge (2, 0), nodes 2 and 0 were already part of the exact same set
                 if i_subset == j_subset:
                     return True
 
