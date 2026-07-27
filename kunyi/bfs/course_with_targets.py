@@ -60,3 +60,45 @@ result = solution(dependencies, targets)
 print(result)
 
 
+# DFS visiting + visited
+
+from collections import defaultdict
+def solution(dependencies, targets):
+    parent_to_child = defaultdict(list)
+    child_to_parent = defaultdict(list)
+    for child, parents in dependencies:
+        child_to_parent[child].extend(parents)
+        for p in parents:
+            parent_to_child[p].append(child)
+
+    path = []
+    # fully processed courses
+    visited = set()
+    # courses currently in recursion stack like A -> E -> C;
+    # only when its dependencies are fully processed, it can be added to visited
+    visiting = set()
+
+    def dfs(node):
+        if node in visited:
+            return 
+
+        if node in visiting:
+            raise ValueError("Cycle Exists")
+
+        visiting.add(node)
+        for parent in child_to_parent[node]:
+            dfs(parent)
+
+        visiting.remove(node)
+        visited.add(node)
+        path.append(node)
+        
+        return
+
+    for target in targets:
+        dfs(target)
+
+    return path
+
+result = solution(dependencies, targets)
+print(result)
